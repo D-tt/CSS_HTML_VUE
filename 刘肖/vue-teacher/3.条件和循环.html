@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-if控制dom树节点的是否挂载 -->
+        <!-- v-show控制元素的display为none或者block -->
+
+        <div class="box" v-show="visible">这是一个测试div</div>
+
+        <div class="box" v-if="visibleIf">这是一个测试div(v-if)</div>
+
+        <div v-for="(item, index) in arr">{{item}}-{{index}}</div>
+
+        <div v-for="(item, index) in arr2">{{item}}-{{index}}</div>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        var myApp = new Vue({
+            el: '#app',
+            data: {
+                visible: true,
+                visibleIf: true,
+                arr: [1,2,3,4,5],
+                arr2: ['js', 'css', 'java', 'php']
+            }
+        })
+    </script>
+</body>
+</html>

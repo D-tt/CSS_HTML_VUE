@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model.number="count1">
+        <input type="text" v-model.number="count2">
+        <input type="text" v-model.number="count3">
+        {{ total }}
+
+        <br>
+
+        {{ arrTotal }}
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        var myApp = new Vue({
+            el: '#app',
+            data: {
+                count1: 0,
+                count2: 0,
+                count3: 0,
+                arr: [
+                    {price: 100},
+                    {price: 100},
+                    {price: 100},
+                    {price: 100}
+                ]
+            },
+            methods: {
+
+            },
+            computed: {
+                total () {
+                    // return 123
+                    return this.count1 + this.count2 + this.count3
+                },
+                arrTotal () {
+                    return this.arr.reduce((prev, next) => {
+                        return prev + next.price
+                    }, 0)
+                }
+            },
+            watch: {
+             
+            }
+        })
+    </script>
+</body>
+</html>

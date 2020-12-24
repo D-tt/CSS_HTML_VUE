@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arr的api方法</title>
+</head>
+<body>
+
+    <select name="" id="sel"></select>
+        
+
+    <script>
+        var arr=[1,2,3,4,5]
+
+        var obj={
+            name:'tom',
+            age:'20',
+            height:185,
+            money:1511046,
+            func:function(){
+                console.log('方法触发了')
+            }
+        }
+
+        var sel=document.getElementById('sel')
+        sel.innerHTML='<option>'+arr.join('</option><option>')+'</option>'
+        
+
+        arr.concat([6],[7])//arr连接新添的数组
+
+        console.log(arr.join(''))//join里面是什么拼接，打印出来就是怎么拼接的，例如现在是空
+
+        arr.slice(0,3)// 含头不含尾 [1,2,3]
+
+        arr.splice(1,2,99)//(从下标为1开始删除，删除几个，把这个值替换为之前删掉的值)
+
+        arr.toString()// 打出字符串，是用','分隔
+
+        arr.push(6)//在末尾加入 '6'
+        arr.pop()//删除末尾的一个值
+        arr.shift()//在开头删除一个值
+        arr.unshift(0)//在开头加入一个值 '0'
+
+
+        // arr.filter()
+        // arr.map()
+        // arr.findIndex()
+        // arr.reduce()
+        // arr.includes
+
+        //此种for循环非常低级，一般不用
+        for(var i=0;i<arr.length;i++){
+            console.log(i)
+            console.log(arr[i])
+        }
+
+        //forEach也是一种循环
+        arr.forEach(function(item,index){
+            console.log('item',item)//数值
+            console.log('index',index)//下标
+        })
+
+        //
+        for(var key in obj){
+            console.log(key)
+            console.log(obj[key])
+        }
+
+        // arr.map()  有返回值
+        // var newArr=arr.map(function(item){
+        //     console.log(item)
+
+        //     return '<option>'+item+'<option>'
+        // })
+        // console.log(newArr)
+
+
+        //arr.findIndex() //查找符合条件的下标
+        // var index=arr.findIndex(function(item){
+        //     return item===4
+        // })
+        // console.log(index) //返回-1时，说明没有这个数值，未找到这个数值
+
+
+
+        //arr.filter()  //判断条件
+        // var newArr=arr.filter(function(item){
+            // return 0
+            // return ''
+            // return null
+            // return undefined
+            // return false
+            // return NaN
+            // return []
+            // return {}
+            // return item.toString().includes(0)
+        // })
+        // console.log(newArr)
+
+
+        // arr.reduce()  //累加
+        // var total=arr.reduce(function(prev,next){
+        //     return prev+next
+        // }) //可以在此行的小括号里给其一个初始值 格式： ',数值'
+        // console.log(total)
+
+        //arr.reduce()  examp例子
+            var objArr=[
+                {name:'tom1',age:10},
+                {name:'tom2',age:11},
+                {name:'tom3',age:12},
+                {name:'tom4',age:13},
+                {name:'tom5',age:14},
+                {name:'tom6',age:15},
+                {name:'tom7',age:16},
+            ]
+            var ageTotal=objArr.reduce(function(prev,next){
+                console.log('prev',prev)
+                console.log('next',next)
+
+                return prev + next.age
+            },0) //括号里的 ',0' 是给prev一个初始值0
+            console.log(ageTotal)
+
+        
+
+    </script>
+</body>
+</html>
