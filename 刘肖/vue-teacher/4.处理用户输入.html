@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{count}}
+
+        <button v-on:click="add">click</button>
+        <br>
+        {{message}}
+        <button v-on:click="change">反转</button>
+
+        <br>
+
+        <input v-model="inpValue" type="text">
+        {{ inpValue }}
+        {{ inpValue.split('').reverse().join('') }}
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        var myApp = new Vue({
+            el: '#app',
+            data: {
+                count: 0,
+                message: 'hello world',
+                inpValue: ''
+            },
+            methods: {
+                add () {
+                    this.count++
+                    console.log(this.count)
+                },
+                change () {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active{
+            color: red;
+        }
+        .active2{
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div :class="classObj">这是一段测试文字</div>
+
+        <div v-bind:style='{color: 100===100 ? "red" : "green"}'> 这是控制style的div</div>
+    </div>
+   
+
+    <script src="../js/vue.js"></script>
+
+    <script>
+        var VM=new Vue({
+            el:'#app',
+            data:{
+                result:true,
+                classObj:{
+                    active:true,
+                    active2:true
+                }
+            },
+            methods:{
+                
+            }
+        })
+
+    </script>
+</body>
+</html>

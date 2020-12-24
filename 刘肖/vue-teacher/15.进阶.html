@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <child :msg.sync="parentMsg"></child>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        Vue.component('child', {
+            props: {
+                msg: {
+                    type: String,
+                    default: ''
+                }
+            },
+            template: `
+                <div>
+                    {{msg}}
+                    <button @click="handlerMsg">change</button>
+                </div>
+            `,
+            methods: {
+                handlerMsg () {
+                    this.$emit('update:msg', '这是我改变以后的值')
+                    // this.msg = '这是我改变以后的值'
+                }
+            }
+        })
+
+        var myApp = new Vue({
+            el: '#app',
+            data: {
+                parentMsg: '123'
+            },
+            methods: {
+            }
+        })
+    </script>
+</body>
+</html>

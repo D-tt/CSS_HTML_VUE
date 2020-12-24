@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        {{msg}}
+
+        {{arr}}
+
+        <ul>
+            <li v-for="item in arr">
+                <input type="text" v-model.number="item.count">
+                {{item.count}} {{item.name}} {{item.price}}
+                <i v-if="!item.count">--该书本已售空</i>
+                <button @click="item.count++">add</button>
+            </li>
+        </ul>
+
+        {{total}}
+    </div>
+
+    <script src="js/vue.js"></script>
+
+    <script>
+        var myApp = new Vue({
+            el: '#app',
+            data: {
+                msg: 'this is my test msg',
+                arr: [
+                    {count: 0, name: 'javascript', price: 10},
+                    {count: 3, name: 'css', price: 12},
+                    {count: 5, name: 'php', price: 16},
+                    {count: 1, name: 'java', price: 23}
+                ]
+            },
+            computed: {
+                total () {
+                    return this.arr.reduce((prev, next) => {
+                        return prev + (next.count * next.price) 
+                    }, 0)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input v-model="inpvalue" type="text">{{inpvalue}}
+        {{inpvalue}}
+        {{msg}}
+
+        <br>
+        count1:{{count1}}
+        count2:{{count2}}
+        total:{{total}}
+    </div>
+    <script src="../js/vue.js"></script>
+
+    <script>
+        var myApp = new Vue({
+            el: '#app',
+            data: {
+                inpvalue: "",
+                msg:'',
+                count1:0,
+                count2:0,
+                total:0,
+            },
+            methods:{
+
+            },
+            watch: {
+                inpvalue (newValue,oldvalue) {
+                    this.msg=newValue+'-这是我的回答'
+                    console.log(newvalue)
+                    console.log(oldvalue)
+                },
+                count1(newValue,oldvalue){
+                    this.total=newValue+this.count2
+                },
+                count2(newValue,oldvalue){
+                    this.total=newValue+this.count1
+                }
+            }
+        })
+    </script>
+</body>
+</html>
