@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习</title>
+    <style>
+        .header{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .header li{
+            width: 120px;
+            height: 40px;
+            border: 1px solid #ddd;
+            text-align: center;
+            line-height: 40px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .book-item{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .book-item li{
+            width: 120px;
+            height: 40px;
+            border: 1px solid #ddd;
+            text-align: center;
+            line-height: 40px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="bookName">
+        <button v-on:click="add">push</button>
+
+        <ul class="header">
+            <li>编号</li>
+            <li>书名</li>
+            <li>单价</li>
+            <li>操作</li>
+            <li>总价</li>
+        </ul>
+        <ul class="book-item" v-for="(item,index) in list">
+            <li>{{index +1}}</li>
+            <li>{{item.bookName}}</li>
+            <li>{{item.price}}</li>
+            <li>
+                <button v-on:click="deleteCount(item)">-</button>
+                {{item.count}}
+                <button v-on:click="addCount(item)">+</button>
+            </li>
+            <li>{{item.total}}</li>
+        </ul>
+
+        <div>总价：{{allTotal}}</div>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        var myApp=new Vue({
+            el:'#app',
+            data:{
+                bookName:'',
+                list:[]
+            },
+            methods:{
+                add(){
+                    this.list.push({
+                        // code:0,
+                        bookName:this.bookName,
+                        count:0,
+                        price:(Math.random()*100).toFixed(2),
+                        total:0
+                    })
+                    this.bookName=''
+                },
+                addCount(data){
+                    data.count++
+
+                    data.total=(data.count*data.price).toFixed(2)
+                },
+                deleteCount(data){
+                    if(data.count===0){
+                        return
+                    }
+                    data.count--
+
+                    data.total=(data.count*data.price).toFixed(2)
+                },
+            },
+            computed:{
+                allTotal(){
+                    return this.list.reduce((prev,next)=>{
+                        console.log('prev',prev)
+                        console.log('next',next)
+
+                        return Number(prev)+Number(next.total)
+                    },0)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

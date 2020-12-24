@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        parentCount: {{parentCount}}
+        <br>
+        <child v-on:aabbcc="parentAdd" v-bind:abc="parentValue" v-bind:parent-arr="list"></child>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+
+        Vue.component('child', {
+            props: {
+                abc: {
+                    type: String,
+                    default: ''
+                },
+                parentArr: {
+                    type: Array,
+                    default: []
+                }
+            },
+            template: `
+                <div>
+                    <button v-on:click="toParentFunc">触发parent的方法</button>
+
+                    <div class="child-box">{{componentMsg}}</div>
+                    <button v-on:click="add">click</button>
+                    {{abc}}
+                    {{parentArr}}
+
+                    <ul>
+                        <li v-for="item in parentArr">{{item}}</li>    
+                    </ul>
+                </div>
+            `,
+            data () {
+                return {
+                    componentMsg: '这是组件的信息'
+                }
+            },
+            methods: {
+                add () {
+                    console.log('按钮被点击了')
+                    console.log(this.componentMsg)
+                },
+                toParentFunc () {
+                    // 事件名
+                    this.$emit('aabbcc', this.componentMsg)
+                }
+            }
+        })
+
+
+        var myApp = new Vue({
+            el: '#app',
+            data: {
+                parentValue: '这是全局的数据',
+                list: [1,2,3,4,5],
+                parentCount: 0
+            },
+            methods: {
+               parentAdd (data) {
+                   console.log(data)
+                   console.log('父组件的方法被处罚了')
+                   this.parentCount++
+               }
+            }
+        })
+    </script>
+</body>
+</html>

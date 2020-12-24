@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>放大镜</title>
+    <style>
+        body{
+            display: flex;
+        }
+
+        .base-box{
+            position: relative;
+            width: 450px;
+            height: 450px;
+            border: 1px solid #ddd;
+            background: url(image/my-computed-small.jpg) no-repeat;
+        }
+
+        .move-box{
+            position: absolute;
+            top: 0;
+            left: 0; 
+            background: #FEDE4F;
+            opacity: 0.5;/*设置透明度*/
+            width: 300px;
+            height: 300px;
+        }
+
+        .large-box{
+            position: relative;
+            width: 540px;
+            height: 540px;
+            border: 1px solid #ddd;
+            overflow: hidden;
+			display: none;
+        }
+
+        .model-box{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .large-box img {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+        <div class="base-box">
+            <div class="move-box"></div>
+
+            <div class="model-box"></div>
+        </div>
+
+		<div class="large-box">
+            <img src="image/my-compute-large.jpg" alt=" ">
+        </div>
+        
+        <script>
+            var basebox=document.querySelector('.base-box');
+            var largebox=document.querySelector('.large-box');
+            var movebox=document.querySelector('.move-box')
+            var moveimg=document.querySelector('.large-box img')
+
+            console.log(movebox)
+            basebox.onmouseover=function(){
+                largebox.style.display='block'
+            }
+
+            basebox.onmouseout=function(){
+                largebox.style.display='none'
+            }
+
+
+            basebox.onmousemove=function(e){
+                var offsetX = e.offsetX
+                var offsetY = e.offsetY
+                var leftPos = offsetX - (300/2)
+                var topPos = offsetY - (300/2)
+
+                if(offsetX<=150){
+                    leftPos=0
+                }
+                if(offsetX>=300){
+                    leftPos=150
+                }
+                if(offsetY<=150){
+                    topPos=0
+                }
+                if(offsetY>=300){
+                    topPos=150
+                }
+
+                movebox.style.left=leftPos+'px'
+                movebox.style.top=topPos+'px'
+
+                moveimg.style.top=-(topPos*1.8)+'px'
+                moveimg.style.left=-(leftPos*1.8)+'px'
+
+                //得到鼠标的位置
+                // console.log('e.target',e.target)
+                // console.log('this',this)
+            }
+        </script>
+
+</body>
+</html>

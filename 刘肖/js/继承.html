@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // AdoptedFather 的原型对象是Object, Object是顶级的对象，再往上也只有  'null' 空对象
+    var AdoptedFather = function(car,money){
+      this.car = car
+      this.money = money
+    }
+
+    // Person 开头大写表示'构造函数'
+    var Person = function(name,age,height){
+      this.name = name
+      this.age = age
+      this.height = height
+
+      // this.sayName = function(){
+      //   console.log('my name is' + this.name)
+      // }
+
+      // 继承  ----强行改变this的指向
+      // AdoptedFather.call(this,'MayBach',10000000000000)
+      // AdoptedFather.apply(this,['MayBach',10000000000000])
+      AdoptedFather.bind(this,'MayBach',10000000000000)()
+
+      // call 和 apply相同点：1.强行改变this指向，立即调用函数
+      // call 和 apply不同点：1.call 是打散参数进行传递，apply 是数组传参
+      // call、apply两者与 bind 的不同点：1.bind 只是改变指向，并不会立即调用函数，所以需要在末尾添加 ()
+
+    }
+
+    var jackMa = new AdoptedFather('MayBach',10000000000000)
+
+    // 继承  ----这种方法叫 修改构造函数的继承
+    // Person.prototype = jackMa   // prototype || _proto_ 表示指针，指向他的原型对象
+
+    var liLei = new Person('liLei','18',188)
+    var hmm = new Person('hmm','16',172)
+
+    console.log(liLei)
+    console.log(liLei.car)
+    console.log(liLei.money)
+    console.log(liLei.toString())    // 继承后，原型对象是AdoptedFather，AdoptedFather没有toString()方法，AdoptedFather 只能向自己的上一层Object对象找这个方法，最终在object中找到
+    console.log(hmm)
+  </script>
+</body>
+</html>

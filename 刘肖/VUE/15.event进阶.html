@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+        <!-- msg.sync  加上  .sync    表示允许子组件修改父组件的内容 -->
+        <child :msg.sync='parentMsg'></child>
+
+    </div>
+
+    <script src="../js/vue.js"></script>
+
+    <script>
+        Vue.component('child',{
+            props:{
+                msg:{
+                    type:String,
+                    default:''
+                }
+            },
+            template:`
+                <div>
+                    {{msg}}
+                    <button @click='handlerMsg'> change </button>
+                </div>
+            `,
+            methods:{
+                handlerMsg(){
+                    this.$emit('update:msg','这是我改变以后的msg值')
+
+                    //this.msg='这是我改变以后的msg值'
+                }
+            }
+        })
+
+
+
+
+        var VM=new Vue({
+            el:'#app',
+            data:{
+                parentMsg:'这是父组件的内容'
+            },
+            methods:{
+                
+            }
+        })
+
+    </script>
+</body>
+</html>

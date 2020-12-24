@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child @push-parent='addArr'></child>
+
+        {{list}}
+    </div>
+
+    <script src="../js/vue.js"></script>
+
+    <script>
+
+        Vue.component('child',{
+            template:`
+                <div class=''>
+                    <input type='text' v-model='inpValue'>
+
+                    <button @click="toParent"> push </button>
+
+                    {{inpValue}}
+                </div>
+            `,
+            data(){ //组件里的data 必须是一个 function 函数
+                return {
+                    inpValue:''
+                }
+            },
+            methods:{
+                toParent(){
+                    this.$emit('push-parent',this.inpValue)
+
+                    this.inpValue=''
+                }
+            }
+        })
+
+
+        var VM= new Vue({
+            el:'#app',
+            data:{
+                list:[]
+            },
+            methods:{
+                addArr(data){
+                    console.log(data)
+
+                    this.list.push(data)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

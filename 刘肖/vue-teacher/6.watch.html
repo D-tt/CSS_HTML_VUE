@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .header li {
+            width: 150px;
+            height: 40px;
+            border: 1px solid #ddd;
+            text-align: center;
+            line-height: 40px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .book-item {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .book-item li {
+            width: 150px;
+            height: 40px;
+            border: 1px solid #ddd;
+            text-align: center;
+            line-height: 40px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input v-model="inpValue" type="text">
+        {{inpValue}}
+
+        {{msg}}
+
+        <br>
+
+        count1:{{count1}}
+        count2:{{count2}}
+        total:{{total}}
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        var myApp = new Vue({
+            el: '#app',
+            data: {
+                inpValue: '',
+                msg: '',
+                count1: 0,
+                count2: 0,
+                total: 0
+            },
+            methods: {
+
+            },
+            watch: {
+                inpValue (newValue, oldValue) {
+                    this.msg = newValue + '-这是我的回答'
+                    console.log(newValue)
+                    console.log(oldValue)
+                },
+                count1 (newValue, oldValue) {
+                    this.count1 = this.count1 + 1
+                },
+                count2 (newValue, oldValue) {
+                    this.total = newValue + this.count1
+                }
+            }
+        })
+    </script>
+</body>
+</html>

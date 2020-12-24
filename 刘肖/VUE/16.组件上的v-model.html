@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child v-model='parentValue'></child>
+        parentValue: {{parentValue}}
+    </div>
+
+    <script src="../js/vue.js"></script>
+
+    <script>
+
+        Vue.component('child',{
+            props:{
+                value:{
+                    type:String,
+                    default:''
+                }
+            },
+            template:`
+                    <div>
+                        <input type='text' v-model='inpValue'>
+                        {{inpValue}}
+                    </div>
+            `,
+            watch:{
+                value(newValue,oldValue){
+                    console.log('aaa',newValue)
+
+                    this.inpValue=newValue
+                },
+                inpValue(newValue,oldValue){
+                    console.log('inpValue',newValue)
+
+                    this.$emit('input',newValue)
+                }
+            },
+            data(){
+                return{
+                    inpValue:''
+                }
+            }
+        })
+
+
+
+        var VM=new Vue({
+            el:'#app',
+            data:{
+                parentValue:''
+            },
+            methods:{
+                
+            }
+        })
+
+    </script>
+</body>
+</html>
